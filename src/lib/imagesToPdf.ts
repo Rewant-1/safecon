@@ -43,7 +43,7 @@ export async function imagesToPdf(
       pageWidth = image.width + margin * 2;
       pageHeight = image.height + margin * 2;
     } else {
-      const dims = PAGE_SIZES[pageSize];
+      const dims = PAGE_SIZES[pageSize as keyof typeof PAGE_SIZES];
       pageWidth = dims.width;
       pageHeight = dims.height;
     }
@@ -68,5 +68,5 @@ export async function imagesToPdf(
   }
 
   const pdfBytes = await pdfDoc.save();
-  return new Blob([pdfBytes], { type: "application/pdf" });
+  return new Blob([pdfBytes as any], { type: "application/pdf" });
 }

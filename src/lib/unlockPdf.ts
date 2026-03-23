@@ -3,16 +3,17 @@
  * Removes password encryption from a PDF using pdf-lib.
  */
 
+import { decryptPDF } from "@pdfsmaller/pdf-decrypt-lite";
 import { PDFDocument } from "pdf-lib";
 
 export async function unlockPdf(
   file: File,
   password: string
 ): Promise<Blob> {
-  const bytes = await file.arrayBuffer();
-  const pdfDoc = await PDFDocument.load(bytes, { password });
+  const bytes = new Uint8Array(await file.arrayBuffer());
+  
+  // Decrypt the PDF bytes directly
+  const decryptedBytes = await decryptPDF(bytes, password);
 
-  // Save without encryption
-  const saved = await pdfDoc.save();
-  return new Blob([saved], { type: "application/pdf" });
+  return new Blob([decryptedBytes as any], { type: "application/pdf" });
 }

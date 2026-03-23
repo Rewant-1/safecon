@@ -42,7 +42,7 @@ export default function Navbar() {
     <motion.header
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
       className="sticky top-6 z-50 mx-auto w-full max-w-[1400px] px-6 sm:px-12 md:px-24"
     >
       <nav className="flex items-center justify-between h-16 rounded-2xl bg-white/70 backdrop-blur-2xl border border-white/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] px-6">

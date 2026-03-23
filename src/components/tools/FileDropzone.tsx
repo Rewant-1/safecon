@@ -44,7 +44,7 @@ export default function FileDropzone({
 
   return (
     <motion.div
-      {...getRootProps()}
+      {...getRootProps() as any}
       initial={false}
       animate={{
         scale: isDragActive ? 0.98 : 1,
@@ -59,7 +59,7 @@ export default function FileDropzone({
           ? "rgba(0, 0, 0, 0.2)" 
           : "rgba(0, 0, 0, 0.05)",
       }}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
       className={`
         relative flex flex-col items-center justify-center gap-6 py-20 px-8 
         rounded-[32px] border cursor-pointer outline-none overflow-hidden
