@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -13,6 +14,14 @@ const categories = [
       { href: "/compress", label: "Compress" },
       { href: "/images-to-pdf", label: "Images → PDF" },
       { href: "/pdf-to-images", label: "PDF → Images" },
+    ],
+  },
+  {
+    label: "Organize",
+    links: [
+      { href: "/merge-pdf", label: "Merge" },
+      { href: "/split-pdf", label: "Split" },
+      { href: "/rotate-pdf", label: "Rotate" },
     ],
   },
   {
@@ -32,7 +41,6 @@ const categories = [
   },
 ];
 
-const allLinks = categories.flatMap((c) => c.links);
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -47,58 +55,56 @@ export default function Navbar() {
     >
       <nav className="flex items-center justify-between h-16 rounded-2xl bg-white/70 backdrop-blur-2xl border border-white/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] px-6">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center text-white font-medium text-sm transition-transform duration-500 ease-out group-hover:scale-95">
-            S
-          </div>
-          <span className="font-semibold text-sm tracking-widest uppercase">
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <Image
+            src="/Logo.png"
+            alt="SafeCon"
+            width={32}
+            height={32}
+            className="w-auto h-auto min-w-[32px] min-h-[32px] transition-transform duration-500 ease-out group-hover:scale-95"
+          />
+          <span className="font-semibold text-sm tracking-widest uppercase hidden sm:inline">
             SafeCon
           </span>
         </Link>
 
-        {/* Desktop: Compact grouped links */}
-        <div className="hidden lg:flex items-center gap-6">
-          {categories.map((cat) => (
-            <div key={cat.label} className="flex items-center gap-3">
-              <span className="text-[9px] font-bold tracking-widest uppercase text-black/20 select-none">
-                {cat.label}
-              </span>
-              {cat.links.map((link) => {
-                const isActive = pathname === link.href;
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`relative text-[11px] font-semibold tracking-wide transition-colors duration-300 ${
-                      isActive ? "text-black" : "text-black/40 hover:text-black"
-                    }`}
-                  >
-                    {link.label}
-                    {isActive && (
-                      <motion.div
-                        layoutId="navbar-indicator"
-                        className="absolute -bottom-1.5 left-0 right-0 h-px bg-black"
-                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                      />
-                    )}
-                  </Link>
-                );
-              })}
+        {/* Desktop: Clean minimal links */}
+        <div className="hidden xl:flex items-center gap-5">
+          {categories.map((cat, idx) => (
+            <div key={cat.label} className="flex items-center gap-5">
+              {idx > 0 && <div className="w-px h-3 bg-black/10" />}
+              <div className="flex items-center gap-4">
+                {cat.links.map((link) => {
+                  const isActive = pathname === link.href;
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={`relative text-[11px] font-semibold tracking-wide transition-colors duration-300 ${
+                        isActive ? "text-black" : "text-black/40 hover:text-black"
+                      }`}
+                    >
+                      {link.label}
+                      {isActive && (
+                        <motion.div
+                          layoutId="navbar-indicator"
+                          className="absolute -bottom-1.5 left-0 right-0 h-px bg-black"
+                          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        />
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Right side */}
+        {/* Mobile menu toggle */}
         <div className="flex items-center gap-3">
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full border border-black/5 bg-black/5 text-black text-[10px] font-bold tracking-widest uppercase">
-            <span className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />
-            Private
-          </div>
-
-          {/* Mobile menu toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden p-2 rounded-lg hover:bg-black/5 transition-colors cursor-pointer"
+            className="xl:hidden p-2 rounded-lg hover:bg-black/5 transition-colors cursor-pointer"
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -113,7 +119,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.98 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden mt-2 p-4 rounded-2xl bg-white/90 backdrop-blur-2xl border border-black/5 shadow-[0_20px_60px_rgb(0,0,0,0.08)]"
+            className="xl:hidden mt-2 p-4 rounded-2xl bg-white/90 backdrop-blur-2xl border border-black/5 shadow-[0_20px_60px_rgb(0,0,0,0.08)]"
           >
             {categories.map((cat) => (
               <div key={cat.label} className="mb-4 last:mb-0">

@@ -11,6 +11,9 @@ import {
   PenTool,
   Lock,
   Unlock,
+  CopyPlus,
+  Scissors,
+  RotateCw,
   ArrowRight,
 } from "lucide-react";
 
@@ -35,6 +38,29 @@ const categories = [
         title: "PDF → Images",
         description: "Extract pages as high-res rasters.",
         icon: <FileText className="w-5 h-5" strokeWidth={1.5} />,
+      },
+    ],
+  },
+  {
+    label: "Organize",
+    tools: [
+      {
+        href: "/merge-pdf",
+        title: "Merge PDF",
+        description: "Combine multiple PDFs into one document.",
+        icon: <CopyPlus className="w-5 h-5" strokeWidth={1.5} />,
+      },
+      {
+        href: "/split-pdf",
+        title: "Split PDF",
+        description: "Extract specific pages or page ranges.",
+        icon: <Scissors className="w-5 h-5" strokeWidth={1.5} />,
+      },
+      {
+        href: "/rotate-pdf",
+        title: "Rotate PDF",
+        description: "Fix page orientation with a single click.",
+        icon: <RotateCw className="w-5 h-5" strokeWidth={1.5} />,
       },
     ],
   },
@@ -112,7 +138,7 @@ export default function HomePage() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-black/5 bg-black/[0.02] text-black/60 text-[10px] font-bold tracking-[0.2em] uppercase mb-8"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-black/40 animate-pulse" />
-          Files never leave your browser
+          100% on device processing
         </motion.div>
 
         <motion.h1
@@ -155,11 +181,10 @@ export default function HomePage() {
           </motion.div>
 
           <div
-            className={`grid gap-5 ${
-              category.tools.length === 2
+            className={`grid gap-5 ${category.tools.length === 2
                 ? "grid-cols-1 sm:grid-cols-2"
                 : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-            }`}
+              }`}
           >
             {category.tools.map((tool) => (
               <Link href={tool.href} key={tool.href} className="group outline-none">
@@ -192,17 +217,6 @@ export default function HomePage() {
         </motion.section>
       ))}
 
-      {/* Bottom privacy note */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="text-center pb-8"
-      >
-        <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-black/20">
-          Engineered with obsessive attention to privacy & craft
-        </p>
-      </motion.div>
     </div>
   );
 }

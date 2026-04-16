@@ -1,5 +1,4 @@
 import { encryptPDF } from "@pdfsmaller/pdf-encrypt-lite";
-import { PDFDocument } from "pdf-lib";
 
 export interface ProtectOptions {
   userPassword: string;
@@ -19,5 +18,5 @@ export async function protectPdf(
     options.ownerPassword || options.userPassword
   );
 
-  return new Blob([encryptedBytes as any], { type: "application/pdf" });
+  return new Blob([encryptedBytes as Uint8Array<ArrayBuffer>], { type: "application/pdf" });
 }

@@ -68,5 +68,5 @@ export async function imagesToPdf(
   }
 
   const pdfBytes = await pdfDoc.save();
-  return new Blob([pdfBytes as any], { type: "application/pdf" });
+  return new Blob([pdfBytes as Uint8Array<ArrayBuffer>], { type: "application/pdf" });
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/ui/Navbar";
+import Footer from "@/components/ui/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,9 +15,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SafeCon — Elegant Client-Side Toolkit",
+  title: "SafeCon",
   description:
     "Compress images, construct PDFs, and extract pages. 100% private, elegant, and secure.",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({
@@ -27,6 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased selection:bg-black selection:text-white`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground bg-grain relative">
@@ -34,6 +39,7 @@ export default function RootLayout({
         <main className="flex-1 max-w-[1400px] w-full mx-auto pb-32 pt-16 px-6 sm:px-12 md:px-24">
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   );

@@ -20,26 +20,39 @@ export default function SignPdfPage() {
     if (accepted.length > 0) setFile(accepted[0]);
   }, []);
 
-  // Canvas drawing handlers
-  const startDraw = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    isDrawing.current = true;
+  // Unified coordinate helper for mouse + touch
+  const getXY = (e: React.MouseEvent | React.TouchEvent) => {
     const canvas = canvasRef.current!;
-    const ctx = canvas.getContext("2d")!;
     const rect = canvas.getBoundingClientRect();
-    ctx.beginPath();
-    ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    if ("touches" in e) {
+      const touch = e.touches[0] || e.changedTouches[0];
+      return { x: (touch.clientX - rect.left) * scaleX, y: (touch.clientY - rect.top) * scaleY };
+    }
+    return { x: (e.clientX - rect.left) * scaleX, y: (e.clientY - rect.top) * scaleY };
   };
 
-  const draw = (e: React.MouseEvent<HTMLCanvasElement>) => {
+  // Canvas drawing handlers (mouse + touch)
+  const startDraw = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    e.preventDefault();
+    isDrawing.current = true;
+    const ctx = canvasRef.current!.getContext("2d")!;
+    const { x, y } = getXY(e);
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+  };
+
+  const draw = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
     if (!isDrawing.current) return;
-    const canvas = canvasRef.current!;
-    const ctx = canvas.getContext("2d")!;
-    const rect = canvas.getBoundingClientRect();
+    e.preventDefault();
+    const ctx = canvasRef.current!.getContext("2d")!;
+    const { x, y } = getXY(e);
     ctx.strokeStyle = "#000";
     ctx.lineWidth = 2;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
-    ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+    ctx.lineTo(x, y);
     ctx.stroke();
   };
 
@@ -127,9 +140,13 @@ export default function SignPdfPage() {
               onMouseMove={draw}
               onMouseUp={endDraw}
               onMouseLeave={endDraw}
+              onTouchStart={startDraw}
+              onTouchMove={draw}
+              onTouchEnd={endDraw}
               className="w-full h-[200px] rounded-xl border-2 border-dashed border-black/10 bg-black/[0.01] cursor-crosshair"
+              style={{ touchAction: "none" }}
             />
-            <p className="text-[10px] text-black/30 tracking-wider uppercase mt-3 text-center">Click and drag to draw • Placed on page 1, bottom-right</p>
+            <p className="text-[10px] text-black/30 tracking-wider uppercase mt-3 text-center">Draw or tap to sign • Placed on page 1, bottom-right</p>
           </div>
 
           <button onClick={handleProcess} disabled={!signatureBlob}

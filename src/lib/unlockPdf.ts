@@ -4,7 +4,6 @@
  */
 
 import { decryptPDF } from "@pdfsmaller/pdf-decrypt-lite";
-import { PDFDocument } from "pdf-lib";
 
 export async function unlockPdf(
   file: File,
@@ -15,5 +14,5 @@ export async function unlockPdf(
   // Decrypt the PDF bytes directly
   const decryptedBytes = await decryptPDF(bytes, password);
 
-  return new Blob([decryptedBytes as any], { type: "application/pdf" });
+  return new Blob([decryptedBytes as Uint8Array<ArrayBuffer>], { type: "application/pdf" });
 }

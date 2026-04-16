@@ -40,5 +40,5 @@ export async function signPdf(
   });
 
   const saved = await pdfDoc.save();
-  return new Blob([saved as any], { type: "application/pdf" });
+  return new Blob([saved as Uint8Array<ArrayBuffer>], { type: "application/pdf" });
 }

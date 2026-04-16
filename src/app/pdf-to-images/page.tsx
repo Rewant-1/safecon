@@ -110,7 +110,7 @@ export default function PdfToImagesPage() {
                 </div>
                 <div>
                   <p className="text-base font-semibold tracking-wide text-black leading-tight max-w-[200px] sm:max-w-sm truncate">{file.name}</p>
-                  <p className="text-xs font-medium text-black/40 mt-1">{(file.size / 1024 / 1024).toFixed(2)} MB Payload</p>
+                  <p className="text-xs font-medium text-black/40 mt-1">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
                 </div>
               </div>
               <button
@@ -138,14 +138,14 @@ export default function PdfToImagesPage() {
                   className="w-full h-1 bg-black/5 rounded-full appearance-none outline-none focus:outline-none focus:ring-2 focus:ring-black/10 transition-shadow [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-black [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-lg"
                 />
                 <div className="flex justify-between text-[10px] text-black/30 font-medium tracking-widest uppercase mt-4">
-                  <span>Economic</span>
-                  <span>Opulent</span>
+                  <span>Standard</span>
+                  <span>Ultra</span>
                 </div>
               </div>
 
               <div className="p-6 rounded-2xl bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.03)]">
                 <label className="block text-xs font-bold tracking-widest text-black/40 uppercase mb-6">
-                  Architecture
+                  Format
                 </label>
                 <div className="flex gap-2 p-1 bg-black/[0.03] rounded-xl">
                   {(["png", "jpeg"] as const).map((fmt) => (
