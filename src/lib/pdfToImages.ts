@@ -24,7 +24,7 @@ export interface RenderedPage {
 async function getPdfJs() {
   const pdfjs = await import("pdfjs-dist");
   // Set worker source
-  pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
+  pdfjs.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
   return pdfjs;
 }
 
