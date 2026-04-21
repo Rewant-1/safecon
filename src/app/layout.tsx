@@ -15,9 +15,39 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SafeCon",
+  title: {
+    default: "SafeCon | Every PDF tool you'll ever need",
+    template: "%s | SafeCon",
+  },
   description:
-    "Compress images, construct PDFs, and extract pages. 100% private, elegant, and secure.",
+    "Compress images, construct PDFs, extract pages, merge, split, rotate, watermark, protect, and unlock PDFs. SafeCon is 100% private, elegant, and secure. Powered entirely by your browser.",
+  keywords: [
+    "SafeCon",
+    "PDF tools",
+    "compress PDF",
+    "merge PDF",
+    "split PDF",
+    "protect PDF",
+    "watermark PDF",
+    "browser PDF tools",
+    "private PDF tools"
+  ],
+  authors: [{ name: "SafeCon" }],
+  creator: "SafeCon",
+  publisher: "SafeCon",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://safecon-phi.vercel.app/",
+    siteName: "SafeCon",
+    title: "SafeCon",
+    description: "Every PDF tool you'll ever need. Powered entirely by your browser. No uploads. No tracking.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SafeCon",
+    description: "Every PDF tool you'll ever need. Powered entirely by your browser.",
+  },
   icons: {
     icon: "/icon.png",
   },
