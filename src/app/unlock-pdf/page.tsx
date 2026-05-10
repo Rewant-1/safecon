@@ -62,15 +62,15 @@ export default function UnlockPdfPage() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
           <div className="flex items-center justify-between p-5 rounded-[24px] bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
             <div><p className="text-base font-semibold">{file.name}</p><p className="text-xs text-black/40 mt-1">{formatBytes(file.size)}</p></div>
-            <button onClick={handleReset} className="text-black/20 hover:text-black transition-colors cursor-pointer"><Unlock className="w-4 h-4" /></button>
+            <button onClick={handleReset} aria-label="Reset file" className="text-black/20 hover:text-black transition-colors cursor-pointer"><Unlock className="w-4 h-4" /></button>
           </div>
 
           <div className="p-6 rounded-2xl bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.03)]">
-            <label className="block text-xs font-bold tracking-widest text-black/40 uppercase mb-3">Document Password</label>
+            <label htmlFor="unlock-password" className="block text-xs font-bold tracking-widest text-black/40 uppercase mb-3">Document Password</label>
             <div className="relative">
-              <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter the document's password"
+              <input id="unlock-password" type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter the document's password"
                 className="w-full px-4 py-4 pr-12 rounded-xl bg-black/[0.03] border-none text-sm font-semibold outline-none focus:ring-2 focus:ring-black/10 placeholder:text-black/20" />
-              <button onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-black/30 hover:text-black transition-colors cursor-pointer">
+              <button onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? "Hide password" : "Show password"} className="absolute right-4 top-1/2 -translate-y-1/2 text-black/30 hover:text-black transition-colors cursor-pointer">
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
             </div>

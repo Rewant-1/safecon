@@ -116,6 +116,7 @@ export default function CompressPage() {
                         <span className="text-xs text-black/40 font-medium">{formatBytes(f.size)}</span>
                         <button
                           onClick={() => handleRemove(i)}
+                          aria-label={`Remove ${f.name}`}
                           className="text-black/20 hover:text-red-500 transition-colors cursor-pointer outline-none"
                         >
                           <X className="w-4 h-4" />
@@ -129,11 +130,12 @@ export default function CompressPage() {
               {/* Controls */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="p-6 rounded-2xl bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.03)]">
-                  <label className="flex justify-between text-xs font-bold tracking-widest text-black/40 uppercase mb-6">
+                  <label htmlFor="compress-quality" className="flex justify-between text-xs font-bold tracking-widest text-black/40 uppercase mb-6">
                     <span>Quality</span>
                     <span className="text-black">{Math.round(quality * 100)}%</span>
                   </label>
                   <input
+                    id="compress-quality"
                     type="range"
                     min={0.1}
                     max={1}

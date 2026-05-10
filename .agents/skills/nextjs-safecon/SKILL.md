@@ -1,5 +1,5 @@
 ---
-name: SafeCon Next.js Coding Standards
+name: nextjs-safecon
 description: Enforces project-wide conventions for the SafeCon PDF/Image toolkit built on Next.js 16 App Router, Tailwind CSS v4, TypeScript
 ---
 

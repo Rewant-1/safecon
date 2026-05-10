@@ -77,7 +77,7 @@ export default function WatermarkPdfPage() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
           <div className="flex items-center justify-between p-5 rounded-[24px] bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
             <div><p className="text-base font-semibold">{file.name}</p><p className="text-xs text-black/40 mt-1">{formatBytes(file.size)}</p></div>
-            <button onClick={handleReset} className="text-black/20 hover:text-black transition-colors cursor-pointer"><RotateCcw className="w-4 h-4" /></button>
+            <button onClick={handleReset} aria-label="Reset file" className="text-black/20 hover:text-black transition-colors cursor-pointer"><RotateCcw className="w-4 h-4" /></button>
           </div>
 
           {/* Type Toggle */}
@@ -97,19 +97,19 @@ export default function WatermarkPdfPage() {
           {watermarkType === "text" ? (
             <div className="space-y-4">
               <div className="p-6 rounded-2xl bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.03)]">
-                <label className="block text-xs font-bold tracking-widest text-black/40 uppercase mb-3">Text</label>
-                <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="CONFIDENTIAL"
+                <label htmlFor="watermark-text" className="block text-xs font-bold tracking-widest text-black/40 uppercase mb-3">Text</label>
+                <input id="watermark-text" type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="CONFIDENTIAL"
                   className="w-full px-4 py-3 rounded-xl bg-black/[0.03] border-none text-sm font-semibold outline-none focus:ring-2 focus:ring-black/10 placeholder:text-black/20" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="p-6 rounded-2xl bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.03)]">
-                  <label className="flex justify-between text-xs font-bold tracking-widest text-black/40 uppercase mb-4"><span>Opacity</span><span className="text-black">{Math.round(opacity * 100)}%</span></label>
-                  <input type="range" min={0.02} max={0.5} step={0.01} value={opacity} onChange={(e) => setOpacity(parseFloat(e.target.value))}
+                  <label htmlFor="watermark-opacity-text" className="flex justify-between text-xs font-bold tracking-widest text-black/40 uppercase mb-4"><span>Opacity</span><span className="text-black">{Math.round(opacity * 100)}%</span></label>
+                  <input id="watermark-opacity-text" type="range" min={0.02} max={0.5} step={0.01} value={opacity} onChange={(e) => setOpacity(parseFloat(e.target.value))}
                     className="w-full h-1 bg-black/5 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-black [&::-webkit-slider-thumb]:cursor-pointer" />
                 </div>
                 <div className="p-6 rounded-2xl bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.03)]">
-                  <label className="flex justify-between text-xs font-bold tracking-widest text-black/40 uppercase mb-4"><span>Rotation</span><span className="text-black">{rotation}°</span></label>
-                  <input type="range" min={-90} max={90} step={5} value={rotation} onChange={(e) => setRotation(parseInt(e.target.value))}
+                  <label htmlFor="watermark-rotation" className="flex justify-between text-xs font-bold tracking-widest text-black/40 uppercase mb-4"><span>Rotation</span><span className="text-black">{rotation}°</span></label>
+                  <input id="watermark-rotation" type="range" min={-90} max={90} step={5} value={rotation} onChange={(e) => setRotation(parseInt(e.target.value))}
                     className="w-full h-1 bg-black/5 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-black [&::-webkit-slider-thumb]:cursor-pointer" />
                 </div>
               </div>
@@ -119,8 +119,8 @@ export default function WatermarkPdfPage() {
               <FileDropzone onFilesAccepted={handleImageFile} accept={{ "image/*": [".png", ".jpg", ".jpeg"] }} maxFiles={1} label="Drop your logo image" sublabel="PNG or JPEG" />
               {imageFile && <p className="text-sm text-black/60 px-2">Selected: <span className="font-semibold">{imageFile.name}</span></p>}
               <div className="p-6 rounded-2xl bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.03)]">
-                <label className="flex justify-between text-xs font-bold tracking-widest text-black/40 uppercase mb-4"><span>Opacity</span><span className="text-black">{Math.round(opacity * 100)}%</span></label>
-                <input type="range" min={0.02} max={0.5} step={0.01} value={opacity} onChange={(e) => setOpacity(parseFloat(e.target.value))}
+                <label htmlFor="watermark-opacity-image" className="flex justify-between text-xs font-bold tracking-widest text-black/40 uppercase mb-4"><span>Opacity</span><span className="text-black">{Math.round(opacity * 100)}%</span></label>
+                <input id="watermark-opacity-image" type="range" min={0.02} max={0.5} step={0.01} value={opacity} onChange={(e) => setOpacity(parseFloat(e.target.value))}
                   className="w-full h-1 bg-black/5 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-black [&::-webkit-slider-thumb]:cursor-pointer" />
               </div>
             </div>

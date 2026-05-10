@@ -75,7 +75,7 @@ export default function AddPageNumbersPage() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
           <div className="flex items-center justify-between p-5 rounded-[24px] bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
             <div><p className="text-base font-semibold">{file.name}</p><p className="text-xs text-black/40 mt-1">{formatBytes(file.size)}</p></div>
-            <button onClick={handleReset} className="text-black/20 hover:text-black transition-colors cursor-pointer"><RotateCcw className="w-4 h-4" /></button>
+            <button onClick={handleReset} aria-label="Reset file" className="text-black/20 hover:text-black transition-colors cursor-pointer"><RotateCcw className="w-4 h-4" /></button>
           </div>
 
           {/* Position Grid */}
@@ -93,13 +93,13 @@ export default function AddPageNumbersPage() {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="p-6 rounded-2xl bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.03)]">
-              <label className="block text-xs font-bold tracking-widest text-black/40 uppercase mb-3">Start From</label>
-              <input type="number" value={startFrom} onChange={(e) => setStartFrom(parseInt(e.target.value) || 1)} min={1}
+              <label htmlFor="page-number-start" className="block text-xs font-bold tracking-widest text-black/40 uppercase mb-3">Start From</label>
+              <input id="page-number-start" type="number" value={startFrom} onChange={(e) => setStartFrom(parseInt(e.target.value) || 1)} min={1}
                 className="w-full px-4 py-3 rounded-xl bg-black/[0.03] border-none text-sm font-semibold outline-none focus:ring-2 focus:ring-black/10" />
             </div>
             <div className="p-6 rounded-2xl bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.03)]">
-              <label className="block text-xs font-bold tracking-widest text-black/40 uppercase mb-3">Prefix</label>
-              <input type="text" value={prefix} onChange={(e) => setPrefix(e.target.value)} placeholder='e.g. "Page "'
+              <label htmlFor="page-number-prefix" className="block text-xs font-bold tracking-widest text-black/40 uppercase mb-3">Prefix</label>
+              <input id="page-number-prefix" type="text" value={prefix} onChange={(e) => setPrefix(e.target.value)} placeholder='e.g. "Page "'
                 className="w-full px-4 py-3 rounded-xl bg-black/[0.03] border-none text-sm font-semibold outline-none focus:ring-2 focus:ring-black/10 placeholder:text-black/20" />
             </div>
           </div>

@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { RotateCw, Download, RotateCcw, X } from "lucide-react";
+import { RotateCw, Download, X } from "lucide-react";
 import FileDropzone from "@/components/tools/FileDropzone";
 import ProgressBar from "@/components/ui/ProgressBar";
 import ErrorBanner from "@/components/ui/ErrorBanner";
@@ -73,7 +73,7 @@ export default function RotatePdfPage() {
               <p className="text-base font-semibold">{file.name}</p>
               <p className="text-xs text-black/40 mt-1">{formatBytes(file.size)}</p>
             </div>
-            <button onClick={handleReset} className="p-3 rounded-full text-black/20 hover:text-black hover:bg-black/5 transition-colors cursor-pointer outline-none">
+            <button onClick={handleReset} aria-label="Reset file" className="p-3 rounded-full text-black/20 hover:text-black hover:bg-black/5 transition-colors cursor-pointer outline-none">
               <X className="w-5 h-5" />
             </button>
           </div>

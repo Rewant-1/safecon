@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FileText, Download, RotateCcw, X, Image as ImageIcon } from "lucide-react";
+import { FileText, Download, X } from "lucide-react";
 import FileDropzone from "@/components/tools/FileDropzone";
 import ProgressBar from "@/components/ui/ProgressBar";
 import ErrorBanner from "@/components/ui/ErrorBanner";
@@ -115,6 +115,7 @@ export default function PdfToImagesPage() {
               </div>
               <button
                 onClick={handleReset}
+                aria-label="Reset file"
                 className="p-3 rounded-full text-black/20 hover:text-black hover:bg-black/5 transition-colors cursor-pointer outline-none"
               >
                 <X className="w-5 h-5" />
@@ -124,11 +125,12 @@ export default function PdfToImagesPage() {
             {/* Controls */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="p-6 rounded-2xl bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.03)]">
-                <label className="flex justify-between text-xs font-bold tracking-widest text-black/40 uppercase mb-6">
+                <label htmlFor="pdf-images-scale" className="flex justify-between text-xs font-bold tracking-widest text-black/40 uppercase mb-6">
                   <span>Resolution</span>
                   <span className="text-black">{scale * 72} DPI</span>
                 </label>
                 <input
+                  id="pdf-images-scale"
                   type="range"
                   min={1}
                   max={4}
@@ -218,6 +220,7 @@ export default function PdfToImagesPage() {
               </button>
               <button
                 onClick={handleReset}
+                aria-label="Reset view"
                 className="flex items-center justify-center w-10 h-10 rounded-full border border-black/5 text-black/40 hover:text-black hover:border-black/20 transition-all cursor-pointer"
               >
                 <X className="w-4 h-4" />

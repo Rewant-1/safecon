@@ -24,6 +24,7 @@ export default function FileDropzone({
   sublabel,
   disabled = false,
 }: FileDropzoneProps) {
+  const inputAriaLabel = label || "Upload files";
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       if (acceptedFiles.length > 0) {
@@ -42,31 +43,34 @@ export default function FileDropzone({
       disabled,
     });
 
+  const { onAnimationStart, onAnimationStartCapture, ...rootProps } =
+    getRootProps();
+
   return (
-    <motion.div
-      {...getRootProps() as any}
-      initial={false}
-      animate={{
-        scale: isDragActive ? 0.98 : 1,
-        backgroundColor: isDragReject 
-          ? "rgba(239, 68, 68, 0.04)" 
-          : isDragActive 
-          ? "rgba(0, 0, 0, 0.04)" 
-          : "rgba(0, 0, 0, 0.01)",
-        borderColor: isDragReject 
-          ? "rgba(239, 68, 68, 0.2)" 
-          : isDragActive 
-          ? "rgba(0, 0, 0, 0.2)" 
-          : "rgba(0, 0, 0, 0.05)",
-      }}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
-      className={`
-        relative flex flex-col items-center justify-center gap-6 py-20 px-8 
-        rounded-[32px] border cursor-pointer outline-none overflow-hidden
-        ${disabled ? "opacity-50 cursor-not-allowed" : ""}
-      `}
-    >
-      <input {...getInputProps()} />
+    <div {...rootProps}>
+      <motion.div
+        initial={false}
+        animate={{
+          scale: isDragActive ? 0.98 : 1,
+          backgroundColor: isDragReject 
+            ? "rgba(239, 68, 68, 0.04)" 
+            : isDragActive 
+            ? "rgba(0, 0, 0, 0.04)" 
+            : "rgba(0, 0, 0, 0.01)",
+          borderColor: isDragReject 
+            ? "rgba(239, 68, 68, 0.2)" 
+            : isDragActive 
+            ? "rgba(0, 0, 0, 0.2)" 
+            : "rgba(0, 0, 0, 0.05)",
+        }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
+        className={`
+          relative flex flex-col items-center justify-center gap-6 py-20 px-8 
+          rounded-[32px] border cursor-pointer outline-none overflow-hidden
+          ${disabled ? "opacity-50 cursor-not-allowed" : ""}
+        `}
+      >
+        <input {...getInputProps({ "aria-label": inputAriaLabel })} />
 
       {/* Decorative gradient blur behind icon */}
       <AnimatePresence>
@@ -112,6 +116,7 @@ export default function FileDropzone({
           </p>
         )}
       </div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 }

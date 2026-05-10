@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Scissors, Download, RotateCcw, X } from "lucide-react";
+import { Scissors, Download, X } from "lucide-react";
 import FileDropzone from "@/components/tools/FileDropzone";
 import ProgressBar from "@/components/ui/ProgressBar";
 import ErrorBanner from "@/components/ui/ErrorBanner";
@@ -73,16 +73,17 @@ export default function SplitPdfPage() {
               <p className="text-base font-semibold">{file.name}</p>
               <p className="text-xs text-black/40 mt-1">{formatBytes(file.size)}</p>
             </div>
-            <button onClick={handleReset} className="p-3 rounded-full text-black/20 hover:text-black hover:bg-black/5 transition-colors cursor-pointer outline-none">
+            <button onClick={handleReset} aria-label="Reset file" className="p-3 rounded-full text-black/20 hover:text-black hover:bg-black/5 transition-colors cursor-pointer outline-none">
               <X className="w-5 h-5" />
             </button>
           </div>
 
           <div className="p-6 rounded-2xl bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.03)]">
-            <label className="block text-xs font-bold tracking-widest text-black/40 uppercase mb-3">
+            <label htmlFor="split-page-ranges" className="block text-xs font-bold tracking-widest text-black/40 uppercase mb-3">
               Pages to Extract
             </label>
             <input 
+              id="split-page-ranges"
               type="text" 
               value={pageRanges} 
               onChange={(e) => setPageRanges(e.target.value)} 

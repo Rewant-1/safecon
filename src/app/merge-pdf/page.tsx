@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { motion, Reorder, AnimatePresence } from "framer-motion";
-import { CopyPlus, X, Download, RotateCcw, GripVertical } from "lucide-react";
+import { CopyPlus, X, Download, GripVertical } from "lucide-react";
 import FileDropzone from "@/components/tools/FileDropzone";
 import ProgressBar from "@/components/ui/ProgressBar";
 import ErrorBanner from "@/components/ui/ErrorBanner";
@@ -111,6 +111,7 @@ export default function MergePdfPage() {
                         <span className="text-xs text-black/40 font-medium">{formatBytes(f.size)}</span>
                         <button
                           onClick={() => removeFile(i)}
+                          aria-label={`Remove ${f.name}`}
                           className="text-black/20 hover:text-red-500 transition-colors cursor-pointer outline-none"
                         >
                           <X className="w-4 h-4" />
